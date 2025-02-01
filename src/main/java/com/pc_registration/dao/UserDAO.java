@@ -11,7 +11,7 @@ public class UserDAO {
 
     public static User login(String username, String password) {
         String query = "SELECT * FROM users WHERE username = ? AND password = ?";
-        try (Connection conn = DatabaseConfig.getConnection();
+        try (Connection conn = DatabaseCo   nfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, username);
