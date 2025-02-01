@@ -1,29 +1,65 @@
-### IntelliJ IDEA ###
+# Compiled Java class files
+*.class
+*.jar
+*.war
+*.ear
+
+# Log files
+*.log
+logs/
+**/logs/
+*.out
+
+# IntelliJ IDEA files
+.idea/
+*.iml
+*.iws
+*.ipr
 out/
-!src/main/**/out/
-!src/test/**/out/
-
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
 bin/
-!src/main/**/bin/
-!src/test/**/bin/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-### VS Code ###
+# VS Code settings
 .vscode/
+.vscode/*
 
-### Mac OS ###
+# Gradle files
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Maven target directory
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Database files (if any)
+*.db
+*.sqlite
+database/
+db/
+*.sql
+
+# JavaFX specific (optional)
+.fxbuild/
+
+# Environment & Config files
+.env
+.env.local
+.env.development
+.env.production
+*.properties
+*.config
+
+# Temporary files
+*.swp
+*.swo
+*.bak
+Thumbs.db
 .DS_Store
+
+# Dependencies (if using a dependency manager)
+lib/
+node_modules/
