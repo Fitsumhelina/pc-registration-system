@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import utils.FileManager;
 
 public class RegisterPCFrame extends JFrame {
-    private JTextField studentIDField, pcModelField, macAddressField;
+    private JTextField studentNameField, studentIDField, DepartmentField, pcModelField, macAddressField;
     private JButton saveButton;
 
     public RegisterPCFrame() {
@@ -16,9 +16,17 @@ public class RegisterPCFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new GridLayout(4, 2));
 
+        add(new JLabel("Student Name"));
+        studentNameField = new JTextField();
+        add(studentNameField);
+
         add(new JLabel("Student ID:"));
         studentIDField = new JTextField();
         add(studentIDField);
+        
+        add(new JLabel("Department:"));
+        DepartmentField = new JTextField();
+        add(DepartmentField);
 
         add(new JLabel("PC Model:"));
         pcModelField = new JTextField();
@@ -32,14 +40,16 @@ public class RegisterPCFrame extends JFrame {
         add(saveButton);
 
         saveButton.addActionListener(e -> {
+            String studentName = studentNameField.getText();
             String studentID = studentIDField.getText();
+            String studentDepartment = DepartmentField.getText();
             String pcModel = pcModelField.getText();
             String macAddress = macAddressField.getText();
 
-            if (studentID.isEmpty() || pcModel.isEmpty() || macAddress.isEmpty()) {
+            if (studentName.isEmpty() ||  studentID.isEmpty() || studentDepartment.isEmpty() || pcModel.isEmpty() || macAddress.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "All fields must be filled!");
             } else {
-                FileManager.saveData("data/students_pc.txt", studentID + "," + pcModel + "," + macAddress);
+                FileManager.saveData("data/students_pc.txt",studentName + "," + studentID + "," + studentDepartment + ","  + pcModel + "," + macAddress);
                 JOptionPane.showMessageDialog(null, "PC Registered Successfully!");
                 dispose();
             }
