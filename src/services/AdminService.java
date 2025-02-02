@@ -1,4 +1,4 @@
-package main.services;
+package services;
 
 public class AdminService {
     
