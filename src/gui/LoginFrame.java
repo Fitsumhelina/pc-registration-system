@@ -1,27 +1,13 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import services.AdminService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
-import services.AdminService;
 
 public class LoginFrame extends JFrame {
     // DBU PC MANAGEMENT SYSTEM
@@ -39,7 +25,14 @@ public class LoginFrame extends JFrame {
         setTitle("Login - DBU PC Management System");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+        setLayout(new GridBagLayout());
+
+        // GridBagConstraints for responsive layout
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
 
         // Create the header panel with title
         JPanel headerPanel = new JPanel();
@@ -48,12 +41,9 @@ public class LoginFrame extends JFrame {
         headerLabel.setFont(new Font("Arial", Font.BOLD, 18));
         headerLabel.setForeground(Color.WHITE);
         headerPanel.add(headerLabel);
+        gbc.gridwidth = 2;
+        add(headerPanel, gbc);
 
-        // Create the login form panel
-        JPanel loginPanel = new JPanel();
-        loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
-        loginPanel.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
-        
         // Username input
         JPanel usernamePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel usernameLabel = new JLabel("Username:");
@@ -61,7 +51,9 @@ public class LoginFrame extends JFrame {
         usernameField.setPreferredSize(new Dimension(250, 30));
         usernamePanel.add(usernameLabel);
         usernamePanel.add(usernameField);
-        loginPanel.add(usernamePanel);
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        add(usernamePanel, gbc);
 
         // Password input
         JPanel passwordPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -70,7 +62,8 @@ public class LoginFrame extends JFrame {
         passwordField.setPreferredSize(new Dimension(250, 30));
         passwordPanel.add(passwordLabel);
         passwordPanel.add(passwordField);
-        loginPanel.add(passwordPanel);
+        gbc.gridy = 2;
+        add(passwordPanel, gbc);
 
         // Login button
         loginButton = new JButton("Login");
@@ -78,7 +71,9 @@ public class LoginFrame extends JFrame {
         loginButton.setForeground(Color.WHITE);
         loginButton.setPreferredSize(new Dimension(250, 40));
         loginButton.setFont(new Font("Arial", Font.BOLD, 14));
-        loginPanel.add(loginButton);
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        add(loginButton, gbc);
 
         // Action listener for the login button
         loginButton.addActionListener(new ActionListener() {
@@ -102,13 +97,33 @@ public class LoginFrame extends JFrame {
             }
         });
 
-        // Add the panels to the main frame
-        add(headerPanel, BorderLayout.NORTH);
-        add(loginPanel, BorderLayout.CENTER);
-
-        // Center the frame on the screen
+        // Center the frame on the screen initially
         setLocationRelativeTo(null);
+
+        // Make the window resizable
+        setResizable(true);
+
+        // Adjust components dynamically when window size changes
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent componentEvent) {
+                adjustComponentSizes();
+            }
+        });
+
         setVisible(true);
+    }
+
+    // Adjust component sizes dynamically based on window resizing
+    private void adjustComponentSizes() {
+        // Make the fields and button responsive to window resizing
+        usernameField.setMinimumSize(new Dimension(getWidth() / 2, 30));
+        passwordField.setMinimumSize(new Dimension(getWidth() / 2, 30));
+        loginButton.setMinimumSize(new Dimension(getWidth() / 2, 40));
+
+        // Adjust text fields and buttons based on window size
+        usernameField.setPreferredSize(new Dimension(getWidth() / 2, 30));
+        passwordField.setPreferredSize(new Dimension(getWidth() / 2, 30));
+        loginButton.setPreferredSize(new Dimension(getWidth() / 2, 40));
     }
 
     // Method to validate super admin password by reading from a file
@@ -124,5 +139,9 @@ public class LoginFrame extends JFrame {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        new LoginFrame();
     }
 }
