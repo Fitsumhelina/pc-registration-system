@@ -63,3 +63,4 @@ Thumbs.db
 # Dependencies (if using a dependency manager)
 lib/
 node_modules/
+src/data 
