@@ -10,40 +10,40 @@ import javax.swing.JOptionPane;
 import services.AdminService;
 
 public class RegisterAdminFrame extends JFrame {
-    private JButton registerAdminBtn, updatePCBtn, deletePCBtn, viewAdminBtn, searchPCBtn;
+    private JButton registerAdminBtn, updateAdminBtn, deleteAdminBtn, viewAdminBtn, searchAdminBtn;
     private AdminService adminService;
 
     public RegisterAdminFrame() {
         adminService = new AdminService();
         
-        setTitle("Admin Dashboard");
+        setTitle("SuperAdmin Dashboard");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(5, 1));
 
-        registerPCBtn = new JButton("Create admin");
-        updatePCBtn = new JButton("Update admin");
-        deletePCBtn = new JButton("Delete admin");
-        searchPCBtn = new JButton("Search admin");
+        registerAdminBtn = new JButton("Create admin");
+        updateAdminBtn = new JButton("Update admin");
+        deleteAdminBtn = new JButton("Delete admin");
+        searchAdminBtn = new JButton("Search admin");
         viewAdminBtn = new JButton("View all admins");
 
         add(registerAdminBtn);
-        add(updatePCBtn);
-        add(deletePCBtn);
+        add(updateAdminBtn);
+        add(deleteAdminBtn);
         add(viewAdminBtn);
-        add(searchPCBtn);
+        add(searchAdminBtn); 
 
-        registerAdminBtn.addActionListener(e -> registerPC());
-        updatePCBtn.addActionListener(e -> updatePC());
-        deletePCBtn.addActionListener(e -> deletePC());
+        registerAdminBtn.addActionListener(e -> registerAdmin());
+        updateAdminBtn.addActionListener(e -> updateAdmin());
+        deleteAdminBtn.addActionListener(e -> deleteAdmin());
+        searchAdminBtn.addActionListener(e -> searchAdmin());
         viewAdminBtn.addActionListener(e -> viewAdmins());
-        searchPCBtn.addActionListener(e -> searchPC());
 
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    private void registerPC() {
+    private void registerAdmin() {
         String adminData = JOptionPane.showInputDialog("Enter Admin Details:");
         if (adminData != null) {
             adminService.createAdmin(adminData);
@@ -51,7 +51,7 @@ public class RegisterAdminFrame extends JFrame {
         }
     }
 
-    private void updatePC() {
+    private void updateAdmin() {
         String oldData = JOptionPane.showInputDialog("Enter Existing Admin Details:");
         String newData = JOptionPane.showInputDialog("Enter New Admin Details:");
         if (oldData != null && newData != null) {
@@ -60,7 +60,7 @@ public class RegisterAdminFrame extends JFrame {
         }
     }
 
-    private void deletePC() {
+    private void deleteAdmin() {
         String adminData = JOptionPane.showInputDialog("Enter Admin Details to Delete:");
         if (adminData != null) {
             boolean success = adminService.deleteAdmin(adminData);
@@ -73,7 +73,7 @@ public class RegisterAdminFrame extends JFrame {
         JOptionPane.showMessageDialog(this, admins.isEmpty() ? "No Admins Found" : String.join("\n", admins));
     }
 
-    private void searchPC() {
+    private void searchAdmin() {
         String keyword = JOptionPane.showInputDialog("Enter Search Keyword:");
         if (keyword != null) {
             List<String> results = adminService.searchAdmin(keyword);

@@ -10,7 +10,7 @@ import java.util.List;
 import utils.FileManager;
 
 public class AdminService {
-    private static final String FILE_NAME = "data/admins.txt";
+    private static final String FILE_NAME = "admins.txt";
 
     public void createAdmin(String adminData) {
         FileManager.saveData(FILE_NAME, adminData);
