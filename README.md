@@ -15,12 +15,13 @@
    - Data stored in text files via `FileManager`  
 
 4. **Service Files (`AdminService`, `StudentService`, `StaffService`)**  
+   - Performs logic (CRUD operations) 
    - Defines **where to save** data  
    - Calls `FileManager` to handle logic  
 
 5. **File Manager**  
    - Reads/Writes data from/to files  
-   - Performs logic (CRUD operations)  
+ 
 
 6. **Storage Files**  
    - `admin.txt` → Stores Admin Data  
@@ -33,7 +34,7 @@
 #### **1. Super Admin (Manages Admins)**
 - `Super Admin` → **CRUD Operations** on Admin  
 - Uses **AdminService** to interact with **FileManager**  
-- `FileManager` handles logic and saves data in `admin.txt`  
+- `AdminService` handles logic and saves data in `admin.txt` using file manager 
 
 #### **2. Admin (Manages Students & Staff)**
 - `Admin` → **CRUD Operations** on Students & Staff  
@@ -44,7 +45,7 @@
 #### **3. CRUD Operations & Flow**
 - **Create, Update, Delete, Display, Search**  
 - `AdminService`, `StudentService`, `StaffService` call `FileManager`  
-- `FileManager` manipulates `admin.txt`, `student.txt`, `staff.txt`  
+- `FileManager` open a gate to manipulate `admin.txt`, `student.txt`, `staff.txt`  
 
 ---
 
