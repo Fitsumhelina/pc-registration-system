@@ -50,7 +50,7 @@ public class RegisterAdminFrame extends JFrame {
 
     private void registerAdmin() {
         JTextField nameField = new JTextField();
-        JTextField passwordField = new JPasswordField();
+        JPasswordField passwordField = new JPasswordField();
         Object[] fields = {"Name:", nameField, "Password:", passwordField};
         int option = JOptionPane.showConfirmDialog(this, fields, "Enter Admin Details", JOptionPane.OK_CANCEL_OPTION);
         
@@ -62,17 +62,35 @@ public class RegisterAdminFrame extends JFrame {
     }
 
     private void updateAdmin() {
-        String oldData = JOptionPane.showInputDialog("Enter Existing Admin Details (Name,Password):");
-        String newData = JOptionPane.showInputDialog("Enter New Admin Details (Name,Password):");
-        if (oldData != null && newData != null) {
+        JTextField oldNameField = new JTextField();
+        JPasswordField oldPasswordField = new JPasswordField();
+        JTextField newNameField = new JTextField();
+        JPasswordField newPasswordField = new JPasswordField();
+        
+        Object[] fields = {
+            "Old Name:", oldNameField, "Old Password:", oldPasswordField, 
+            "New Name:", newNameField, "New Password:", newPasswordField
+        };
+
+        int option = JOptionPane.showConfirmDialog(this, fields, "Update Admin Details", JOptionPane.OK_CANCEL_OPTION);
+        
+        if (option == JOptionPane.OK_OPTION) {
+            String oldData = oldNameField.getText() + "," + oldPasswordField.getText();
+            String newData = newNameField.getText() + "," + newPasswordField.getText();
             boolean success = adminService.updateAdmin(oldData, newData);
             JOptionPane.showMessageDialog(this, success ? "Admin Updated Successfully" : "Admin Not Found");
         }
     }
 
     private void deleteAdmin() {
-        String adminData = JOptionPane.showInputDialog("Enter Admin Details to Delete (Name,Password):");
-        if (adminData != null) {
+        JTextField nameField = new JTextField();
+        JPasswordField passwordField = new JPasswordField();
+        
+        Object[] fields = {"Name:", nameField, "Password:", passwordField};
+        int option = JOptionPane.showConfirmDialog(this, fields, "Enter Admin Details to Delete", JOptionPane.OK_CANCEL_OPTION);
+
+        if (option == JOptionPane.OK_OPTION) {
+            String adminData = nameField.getText() + "," + passwordField.getText();
             boolean success = adminService.deleteAdmin(adminData);
             JOptionPane.showMessageDialog(this, success ? "Admin Deleted Successfully" : "Admin Not Found");
         }
