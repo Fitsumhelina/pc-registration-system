@@ -150,3 +150,39 @@ Admin → StaffService → FileManager → staff.txt
    - Acts as the bridge between Services and Storage
 
 ---
+## FOLDER STRUCTURE 
+1. **GUI**
+   - LoginFrame.java
+   - SuperAdminFrame.java
+   - AdminFrame.java
+   - Student
+   - Staff
+
+2. **model/**
+   - Admin.java
+   - StudentPc.java
+   - StaffPc.java
+
+3. **service/**
+   - AdminService.java
+   - StudentService.java
+   - Staff
+
+4. **utils/**
+   - FileManager.java
+
+5. **data/**
+   - admin.txt
+   - student_pc.txt
+   - staff_pc.txt
+
+6. **Src/**
+   - gui/
+   - model/
+   - utils/
+   - APP.java
+
+7. **Project Architecture - SubPlan**
+   - src 
+   - data 
+---
