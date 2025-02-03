@@ -1,7 +1,10 @@
 package gui;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class AdminFrame extends JFrame {
     private JButton registerPCBtn, updatePCBtn, deletePCBtn, viewPCsBtn;
