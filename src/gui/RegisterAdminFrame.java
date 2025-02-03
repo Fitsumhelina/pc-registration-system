@@ -55,7 +55,7 @@ public class RegisterAdminFrame extends JFrame {
         int option = JOptionPane.showConfirmDialog(this, fields, "Enter Admin Details", JOptionPane.OK_CANCEL_OPTION);
         
         if (option == JOptionPane.OK_OPTION) {
-            String adminData = nameField.getText() + "," + passwordField.getText();
+            String adminData = nameField.getText() + "," + passwordField.getPassword();
             adminService.createAdmin(adminData);
             JOptionPane.showMessageDialog(this, "Admin Registered Successfully");
         }
@@ -75,8 +75,8 @@ public class RegisterAdminFrame extends JFrame {
         int option = JOptionPane.showConfirmDialog(this, fields, "Update Admin Details", JOptionPane.OK_CANCEL_OPTION);
         
         if (option == JOptionPane.OK_OPTION) {
-            String oldData = oldNameField.getText() + "," + oldPasswordField.getText();
-            String newData = newNameField.getText() + "," + newPasswordField.getText();
+            String oldData = oldNameField.getText() + "," + oldPasswordField.getPassword();
+            String newData = newNameField.getText() + "," + newPasswordField.getPassword();
             boolean success = adminService.updateAdmin(oldData, newData);
             JOptionPane.showMessageDialog(this, success ? "Admin Updated Successfully" : "Admin Not Found");
         }
@@ -90,7 +90,7 @@ public class RegisterAdminFrame extends JFrame {
         int option = JOptionPane.showConfirmDialog(this, fields, "Enter Admin Details to Delete", JOptionPane.OK_CANCEL_OPTION);
 
         if (option == JOptionPane.OK_OPTION) {
-            String adminData = nameField.getText() + "," + passwordField.getText();
+            String adminData = nameField.getText() + "," + passwordField.getPassword();
             boolean success = adminService.deleteAdmin(adminData);
             JOptionPane.showMessageDialog(this, success ? "Admin Deleted Successfully" : "Admin Not Found");
         }
