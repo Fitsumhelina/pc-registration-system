@@ -1,13 +1,27 @@
 package gui;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import services.AdminService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import services.AdminService;
 
 public class LoginFrame extends JFrame {
     // DBU PC MANAGEMENT SYSTEM
@@ -76,7 +90,7 @@ public class LoginFrame extends JFrame {
                 // Check if the user is the superadmin
                 if (username.equals("superadmin") && validateSuperAdminPassword(password)) {
                     // Route to RegisterAdminFrame if superadmin is valid
-                    new RegisterAdminFrame(); // Route to RegisterAdminFrame
+                    new SuperAdminFrame(); // Route to RegisterAdminFrame
                     dispose(); // Close the login frame
                 } else if (adminService.getAllAdmins().contains(username + "," + password)) {
                     // If the user is an admin from the saved file

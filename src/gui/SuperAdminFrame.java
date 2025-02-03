@@ -24,11 +24,11 @@ import javax.swing.table.DefaultTableModel;
 
 import services.AdminService;
 
-public class RegisterAdminFrame extends JFrame {
+public class SuperAdminFrame extends JFrame {
     private JButton registerAdminBtn, updateAdminBtn, deleteAdminBtn, viewAdminBtn, searchAdminBtn, existBtn;
     private AdminService adminService;
 
-    public RegisterAdminFrame() {
+    public SuperAdminFrame() {
         adminService = new AdminService();
         
         // Set basic window properties
