@@ -55,7 +55,7 @@ public class RegisterPCFrame extends JFrame {
             if (studentName.isEmpty() || studentID.isEmpty() || studentDepartment.isEmpty() || pcModel.isEmpty() || macAddress.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "All fields must be filled!");
             } else {
-                FileManager.saveData("students_pc.txt", studentName + "," + studentID + "," + studentDepartment + "," + pcModel + "," + macAddress);
+                FileManager.writeToFile("students_pc.txt", studentName + "," + studentID + "," + studentDepartment + "," + pcModel + "," + macAddress);
                 JOptionPane.showMessageDialog(null, "PC Registered Successfully!");
                 dispose();
             }
