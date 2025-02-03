@@ -152,35 +152,35 @@ Admin → StaffService → FileManager → staff.txt
 ---
 ## FOLDER STRUCTURE 
 1. **GUI**
-   - Login
-   - SuperAdmin
-   - Admin
+   - LoginFrame.java
+   - SuperAdminFrame.java
+   - AdminFrame.java
    - Student
    - Staff
 
-2. **Model**
-   - Admin
-   - Student
+2. **model/**
+   - Admin.java
+   - StudentPc.java
+   - StaffPc.java
+
+3. **service/**
+   - AdminService.java
+   - StudentService.java
    - Staff
 
-3. **Service**
-   - Admin
-   - Student
-   - Staff
+4. **utils/**
+   - FileManager.java
 
-4. **UTILS**
-   - FileManager
+5. **data/**
+   - admin.txt
+   - student_pc.txt
+   - staff_pc.txt
 
-5. **Data**
-   - Admin.txt
-   - StudentP2.txt
-   - StaffP2.txt
-
-6. **Src**
-   - gui
-   - model
-   - utils
-   - APP.java (suggesting a Java-based application)
+6. **Src/**
+   - gui/
+   - model/
+   - utils/
+   - APP.java
 
 7. **Project Architecture - SubPlan**
    - src 
