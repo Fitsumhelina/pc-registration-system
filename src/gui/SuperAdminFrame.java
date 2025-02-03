@@ -18,7 +18,7 @@ public class SuperAdminFrame extends JFrame {
         createAdminBtn = new JButton("Create Admin");
         updateAdminBtn = new JButton("Update Admin");
         deleteAdminBtn = new JButton("Delete Admin");
-        viewAdminsBtn = new JButton("View Admins");
+        viewAdminsBtn  = new JButton("View Admins");
 
         add(createAdminBtn);
         add(updateAdminBtn);
