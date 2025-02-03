@@ -68,7 +68,7 @@ Admin → StaffService → FileManager → staff.txt
 ---
 
 
-## ** CRUD Operation Flow**
+##  **-> CRUD Operation Flow**
 ### **1. Create (Handled in Service)**
 - `AdminService.createAdmin(data)`
   - Calls `FileManager.write(data, "admin.txt")`
