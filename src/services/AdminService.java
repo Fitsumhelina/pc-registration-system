@@ -1,9 +1,5 @@
 package services;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,56 +8,27 @@ import utils.FileManager;
 public class AdminService {
     private static final String FILE_NAME = "admins.txt";
 
+    // Create new admin
     public void createAdmin(String adminData) {
-        FileManager.saveData(FILE_NAME, adminData);
+        FileManager.writeToFile(FILE_NAME, adminData);
     }
 
+    // Get all admins
     public List<String> getAllAdmins() {
-        List<String> admins = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                admins.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return admins;
+        return FileManager.readFromFile(FILE_NAME);
     }
 
+    // Update an admin's data
     public boolean updateAdmin(String oldData, String newData) {
-        List<String> admins = getAllAdmins();
-        boolean updated = false;
-
-        try (FileWriter writer = new FileWriter(FILE_NAME, false)) {
-            for (String admin : admins) {
-                if (admin.equals(oldData)) {
-                    writer.write(newData + "\n");
-                    updated = true;
-                } else {
-                    writer.write(admin + "\n");
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return updated;
+        return FileManager.updateFile(FILE_NAME, oldData, newData);
     }
 
+    // Delete an admin
     public boolean deleteAdmin(String adminData) {
-        List<String> admins = getAllAdmins();
-        boolean removed = admins.remove(adminData);
-
-        try (FileWriter writer = new FileWriter(FILE_NAME, false)) {
-            for (String admin : admins) {
-                writer.write(admin + "\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return removed;
+        return FileManager.deleteFromFile(FILE_NAME, adminData);
     }
 
+    // Search for admins by keyword
     public List<String> searchAdmin(String keyword) {
         List<String> results = new ArrayList<>();
         for (String admin : getAllAdmins()) {

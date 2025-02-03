@@ -6,6 +6,11 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import services.AdminService;
 
@@ -44,16 +49,21 @@ public class RegisterAdminFrame extends JFrame {
     }
 
     private void registerAdmin() {
-        String adminData = JOptionPane.showInputDialog("Enter Admin Details:");
-        if (adminData != null) {
+        JTextField nameField = new JTextField();
+        JTextField passwordField = new JPasswordField();
+        Object[] fields = {"Name:", nameField, "Password:", passwordField};
+        int option = JOptionPane.showConfirmDialog(this, fields, "Enter Admin Details", JOptionPane.OK_CANCEL_OPTION);
+        
+        if (option == JOptionPane.OK_OPTION) {
+            String adminData = nameField.getText() + "," + passwordField.getText();
             adminService.createAdmin(adminData);
             JOptionPane.showMessageDialog(this, "Admin Registered Successfully");
         }
     }
 
     private void updateAdmin() {
-        String oldData = JOptionPane.showInputDialog("Enter Existing Admin Details:");
-        String newData = JOptionPane.showInputDialog("Enter New Admin Details:");
+        String oldData = JOptionPane.showInputDialog("Enter Existing Admin Details (Name,Password):");
+        String newData = JOptionPane.showInputDialog("Enter New Admin Details (Name,Password):");
         if (oldData != null && newData != null) {
             boolean success = adminService.updateAdmin(oldData, newData);
             JOptionPane.showMessageDialog(this, success ? "Admin Updated Successfully" : "Admin Not Found");
@@ -61,7 +71,7 @@ public class RegisterAdminFrame extends JFrame {
     }
 
     private void deleteAdmin() {
-        String adminData = JOptionPane.showInputDialog("Enter Admin Details to Delete:");
+        String adminData = JOptionPane.showInputDialog("Enter Admin Details to Delete (Name,Password):");
         if (adminData != null) {
             boolean success = adminService.deleteAdmin(adminData);
             JOptionPane.showMessageDialog(this, success ? "Admin Deleted Successfully" : "Admin Not Found");
@@ -70,14 +80,43 @@ public class RegisterAdminFrame extends JFrame {
 
     private void viewAdmins() {
         List<String> admins = adminService.getAllAdmins();
-        JOptionPane.showMessageDialog(this, admins.isEmpty() ? "No Admins Found" : String.join("\n", admins));
+        
+        if (admins.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No Admins Found");
+            return;
+        }
+        
+        String[] columnNames = {"Name", "Password"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        for (String admin : admins) {
+            String[] adminDetails = admin.split(",");
+            model.addRow(adminDetails);
+        }
+        
+        JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+        JOptionPane.showMessageDialog(this, scrollPane, "All Admins", JOptionPane.PLAIN_MESSAGE);
     }
 
     private void searchAdmin() {
         String keyword = JOptionPane.showInputDialog("Enter Search Keyword:");
         if (keyword != null) {
             List<String> results = adminService.searchAdmin(keyword);
-            JOptionPane.showMessageDialog(this, results.isEmpty() ? "No Matching Admins Found" : String.join("\n", results));
+            if (results.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No Matching Admins Found");
+                return;
+            }
+            
+            String[] columnNames = {"Name", "Password"};
+            DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+            for (String admin : results) {
+                String[] adminDetails = admin.split(",");
+                model.addRow(adminDetails);
+            }
+            
+            JTable table = new JTable(model);
+            JScrollPane scrollPane = new JScrollPane(table);
+            JOptionPane.showMessageDialog(this, scrollPane, "Search Results", JOptionPane.PLAIN_MESSAGE);
         }
     }
 }
