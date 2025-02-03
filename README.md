@@ -67,43 +67,86 @@ Admin → StaffService → FileManager → staff.txt
 
 ---
 
-### **CRUD Operations (Detailed Flow)**
-#### **1. Create**
-- **AdminService, StudentService, StaffService**  
-  - Call `FileManager.create(data, file_path)`  
-  - `FileManager` writes data to respective file  
 
-#### **2. Update**
-- **AdminService, StudentService, StaffService**  
-  - Call `FileManager.update(id, new_data, file_path)`  
-  - `FileManager` searches file and updates the record  
+## ** CRUD Operation Flow**
+### **1. Create (Handled in Service)**
+- `AdminService.createAdmin(data)`
+  - Calls `FileManager.write(data, "admin.txt")`
+- `StudentService.createStudent(data)`
+  - Calls `FileManager.write(data, "student.txt")`
+- `StaffService.createStaff(data)`
+  - Calls `FileManager.write(data, "staff.txt")`
 
-#### **3. Delete**
-- **AdminService, StudentService, StaffService**  
-  - Call `FileManager.delete(id, file_path)`  
-  - `FileManager` removes the record from the file  
+### **2. Update (Handled in Service)**
+- `AdminService.updateAdmin(id, new_data)`
+  - Calls `FileManager.read("admin.txt")`
+  - Updates record in memory
+  - Calls `FileManager.write(updated_data, "admin.txt")`
+- `StudentService.updateStudent(id, new_data)`
+  - Calls `FileManager.read("student.txt")`
+  - Updates record
+  - Calls `FileManager.write(updated_data, "student.txt")`
+- `StaffService.updateStaff(id, new_data)`
+  - Calls `FileManager.read("staff.txt")`
+  - Updates record
+  - Calls `FileManager.write(updated_data, "staff.txt")`
 
-#### **4. Display**
-- **AdminService, StudentService, StaffService**  
-  - Call `FileManager.read(file_path)`  
-  - `FileManager` reads data from file and returns list  
+### **3. Delete (Handled in Service)**
+- `AdminService.deleteAdmin(id)`
+  - Calls `FileManager.read("admin.txt")`
+  - Removes record from memory
+  - Calls `FileManager.write(updated_data, "admin.txt")`
+- `StudentService.deleteStudent(id)`
+  - Calls `FileManager.read("student.txt")`
+  - Removes record
+  - Calls `FileManager.write(updated_data, "student.txt")`
+- `StaffService.deleteStaff(id)`
+  - Calls `FileManager.read("staff.txt")`
+  - Removes record
+  - Calls `FileManager.write(updated_data, "staff.txt")`
 
-#### **5. Search**
-- **AdminService, StudentService, StaffService**  
-  - Call `FileManager.search(criteria, file_path)`  
-  - `FileManager` searches and returns matching records  
+### **4. Display (Handled in Service)**
+- `AdminService.getAdmins()`
+  - Calls `FileManager.read("admin.txt")`
+  - Returns all records
+- `StudentService.getStudents()`
+  - Calls `FileManager.read("student.txt")`
+  - Returns all records
+- `StaffService.getStaff()`
+  - Calls `FileManager.read("staff.txt")`
+  - Returns all records
+
+### **5. Search (Handled in Service)**
+- `AdminService.searchAdmin(criteria)`
+  - Calls `FileManager.read("admin.txt")`
+  - Filters data in memory
+  - Returns matching records
+- `StudentService.searchStudent(criteria)`
+  - Calls `FileManager.read("student.txt")`
+  - Filters data
+  - Returns matching records
+- `StaffService.searchStaff(criteria)`
+  - Calls `FileManager.read("staff.txt")`
+  - Filters data
+  - Returns matching records
 
 ---
 
-### **Final Concept**
-- **Super Admin → Manages Admins (CRUD)**
-- **Admin → Manages Students & Staff (CRUD)**
-- **Service Files (AdminService, StudentService, StaffService)**
-  - Define **Storage Path**  
-  - Call **FileManager for Logic**  
-- **FileManager**
-  - Reads/Writes Data  
-  - Performs Logic  
-  - Interacts with Storage Files (`admin.txt`, `student.txt`, `staff.txt`)  
+## **Final Structure**
+1. **Super Admin manages Admins**
+   ```plaintext
+   Super Admin → AdminService (CRUD) → FileManager → admin.txt
+   ```
+2. **Admin manages Students & Staff**
+   ```plaintext
+   Admin → StudentService (CRUD) → FileManager → student.txt
+   Admin → StaffService (CRUD) → FileManager → staff.txt
+   ```
+3. **Service Files (AdminService, StudentService, StaffService)**
+   - Handle **all CRUD logic**
+   - Call `FileManager.read()` or `FileManager.write()`
+4. **FileManager**
+   - Only reads/writes files
+   - Acts as the bridge between Services and Storage
 
 ---
