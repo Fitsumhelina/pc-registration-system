@@ -35,7 +35,7 @@ public class AdminFrame extends JFrame {
         staffService = new StaffService();
 
         setTitle("Admin Dashboard");
-        setSize(600, 550);
+        setSize(550, 550);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -62,34 +62,35 @@ public class AdminFrame extends JFrame {
         // Common Fields
         nameField = new JTextField();
         macAddressField = new JTextField();
-        addField(formPanel, "Name:", nameField, 1);
+        pcModelComboBox = new JComboBox<>(new String[]{"Select PC Model", "Dell", "HP", "Lenovo"});
 
         // Student Fields
-        studentPanel = new JPanel(new GridLayout(5, 2, 5, 5));
+        studentPanel = new JPanel(new GridLayout(5, 2));
         idField = new JTextField();
         departmentComboBox = new JComboBox<>(new String[]{"Select Department", "CS", "EE", "ME"});
-        pcModelComboBox = new JComboBox<>(new String[]{"Select PC Model", "Dell", "HP", "Lenovo"});
+        studentPanel.add(new JLabel("Name:")); studentPanel.add(nameField);
         studentPanel.add(new JLabel("ID:")); studentPanel.add(idField);
         studentPanel.add(new JLabel("Department:")); studentPanel.add(departmentComboBox);
         studentPanel.add(new JLabel("PC Model:")); studentPanel.add(pcModelComboBox);
         studentPanel.add(new JLabel("MAC Address:")); studentPanel.add(macAddressField);
         studentPanel.setVisible(false);
-        gbc.gridy = 2; gbc.gridwidth = 2;
+        gbc.gridy = 1; gbc.gridwidth = 2;
         formPanel.add(studentPanel, gbc);
 
         // Staff Fields
-        staffPanel = new JPanel(new GridLayout(4, 2, 5, 5));
+        staffPanel = new JPanel(new GridLayout(5, 2));
         roleField = new JTextField();
         typeComboBox = new JComboBox<>(new String[]{"Select Type", "Personal", "Organization"});
+        staffPanel.add(new JLabel("Name:")); staffPanel.add(nameField);
         staffPanel.add(new JLabel("Role:")); staffPanel.add(roleField);
         staffPanel.add(new JLabel("Type:")); staffPanel.add(typeComboBox);
         staffPanel.add(new JLabel("PC Model:")); staffPanel.add(pcModelComboBox);
         staffPanel.add(new JLabel("MAC Address:")); staffPanel.add(macAddressField);
         staffPanel.setVisible(false);
-        gbc.gridy = 3;
+        gbc.gridy = 2;
         formPanel.add(staffPanel, gbc);
 
-        // Button Panel
+        // Buttons
         JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 5, 5));
         registerBtn = new JButton("Register");
         updateBtn = new JButton("Update");
@@ -102,8 +103,8 @@ public class AdminFrame extends JFrame {
         buttonPanel.add(deleteBtn);
         buttonPanel.add(searchBtn);
         buttonPanel.add(viewBtn);
-
-        gbc.gridy = 4; gbc.gridwidth = 2;
+        
+        gbc.gridy = 3; gbc.gridwidth = 2;
         formPanel.add(buttonPanel, gbc);
 
         add(formPanel, BorderLayout.CENTER);
@@ -113,10 +114,6 @@ public class AdminFrame extends JFrame {
 
         // Button Listeners
         registerBtn.addActionListener(this::handleRegister);
-        updateBtn.addActionListener(this::handleUpdate);
-        deleteBtn.addActionListener(this::handleDelete);
-        searchBtn.addActionListener(this::handleSearch);
-        viewBtn.addActionListener(this::handleViewAll);
 
         setLocationRelativeTo(null);
         setVisible(true);
@@ -128,22 +125,10 @@ public class AdminFrame extends JFrame {
         staffPanel.setVisible("Staff".equals(selectedType));
     }
 
-    private void addField(JPanel panel, String label, JTextField field, int row) {
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.gridx = 0; gbc.gridy = row;
-        gbc.anchor = GridBagConstraints.WEST;
-        panel.add(new JLabel(label), gbc);
-
-        gbc.gridx = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(field, gbc);
-    }
-
     private void handleRegister(ActionEvent e) {
         String userType = (String) userTypeComboBox.getSelectedItem();
-        if ("Student".equals(userType)) {
-            if (validateStudentFields()) {
+        if (userType.equals("Student")) {
+            if (isStudentFormValid()) {
                 studentService.registerStudent(
                         nameField.getText(),
                         idField.getText(),
@@ -151,11 +136,12 @@ public class AdminFrame extends JFrame {
                         (String) pcModelComboBox.getSelectedItem(),
                         macAddressField.getText()
                 );
-
-             JOptionPane.showMessageDialog(this, "Student Registered Successfully");
+                JOptionPane.showMessageDialog(this, "Student Registered Successfully");
+            } else {
+                JOptionPane.showMessageDialog(this, "All fields must be filled correctly!");
             }
-        } else if ("Staff".equals(userType)) {
-            if (validateStaffFields()) {
+        } else if (userType.equals("Staff")) {
+            if (isStaffFormValid()) {
                 staffService.registerStaff(
                         nameField.getText(),
                         roleField.getText(),
@@ -164,34 +150,23 @@ public class AdminFrame extends JFrame {
                         macAddressField.getText()
                 );
                 JOptionPane.showMessageDialog(this, "Staff Registered Successfully");
+            } else {
+                JOptionPane.showMessageDialog(this, "All fields must be filled correctly!");
             }
         }
     }
 
-    private boolean validateStudentFields() {
-        if (nameField.getText().isEmpty() || idField.getText().isEmpty() ||
-                departmentComboBox.getSelectedIndex() == 0 ||
-                pcModelComboBox.getSelectedIndex() == 0 ||
-                macAddressField.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill in all fields for Student.");
-            return false;
-        }
-        return true;
+    private boolean isStudentFormValid() {
+        return !nameField.getText().isEmpty() && !idField.getText().isEmpty()
+                && departmentComboBox.getSelectedIndex() > 0
+                && pcModelComboBox.getSelectedIndex() > 0
+                && !macAddressField.getText().isEmpty();
     }
 
-    private boolean validateStaffFields() {
-        if (nameField.getText().isEmpty() || roleField.getText().isEmpty() ||
-                typeComboBox.getSelectedIndex() == 0 ||
-                pcModelComboBox.getSelectedIndex() == 0 ||
-                macAddressField.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill in all fields for Staff.");
-            return false;
-        }
-        return true;
+    private boolean isStaffFormValid() {
+        return !nameField.getText().isEmpty() && !roleField.getText().isEmpty()
+                && typeComboBox.getSelectedIndex() > 0
+                && pcModelComboBox.getSelectedIndex() > 0
+                && !macAddressField.getText().isEmpty();
     }
-
-    private void handleUpdate(ActionEvent e) {}
-    private void handleDelete(ActionEvent e) {}
-    private void handleSearch(ActionEvent e) {}
-    private void handleViewAll(ActionEvent e) {}
 }
