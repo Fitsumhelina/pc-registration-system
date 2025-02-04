@@ -3,6 +3,11 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,6 +28,7 @@ public class ViewAllUsersFrame extends JFrame {
     private JComboBox<String> userTypeComboBox;
     private JTable userTable;
     private DefaultTableModel tableModel;
+    private JButton searchBtn, backBtn;
     private StudentService studentService;
     private StaffService staffService;
 
@@ -30,70 +36,84 @@ public class ViewAllUsersFrame extends JFrame {
         studentService = new StudentService();
         staffService = new StaffService();
 
-        setTitle("View All Users");
-        setSize(600, 400);
+        setTitle("Search User");
+        setSize(700, 500);
         setLayout(new BorderLayout());
 
-        // Header Panel
+        // Header
         JPanel headerPanel = new JPanel();
         headerPanel.setBackground(new Color(70, 130, 180));
-        JLabel headerLabel = new JLabel("View All Registered Users");
+        JLabel headerLabel = new JLabel("Search All Users");
         headerLabel.setForeground(Color.WHITE);
         headerLabel.setFont(new Font("Arial", Font.BOLD, 18));
         headerPanel.add(headerLabel);
         add(headerPanel, BorderLayout.NORTH);
 
-        // User Type ComboBox
-        JPanel topPanel = new JPanel();
+        // User Type Selection
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
         userTypeComboBox = new JComboBox<>(new String[]{"Select User Type", "Student", "Staff"});
-        topPanel.add(userTypeComboBox);
-        JButton viewButton = new JButton("View Users");
-        topPanel.add(viewButton);
-        add(topPanel, BorderLayout.CENTER);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        formPanel.add(userTypeComboBox, gbc);
 
         // Table Setup
         tableModel = new DefaultTableModel();
         userTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(userTable);
-        add(scrollPane, BorderLayout.SOUTH);
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        formPanel.add(scrollPane, gbc);
 
-        // Event Listener
-        viewButton.addActionListener(e -> viewUsers());
+        // Buttons
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5));
+        searchBtn = new JButton("Search");
+        backBtn = new JButton("Back");
 
-        // Automatically display students on startup or prompt user for selection
-        userTypeComboBox.setSelectedIndex(0); // Default to "Select User Type"
+        buttonPanel.add(searchBtn);
+        buttonPanel.add(backBtn);
+
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        formPanel.add(buttonPanel, gbc);
+
+        add(formPanel, BorderLayout.CENTER);
+
+        // Event Listeners
+        userTypeComboBox.addActionListener(e -> toggleTable());
+        searchBtn.addActionListener(this::handleSearch);
+        backBtn.addActionListener(e -> {
+            new AdminFrame("Admin"); // Adjust this based on your actual back screen.
+            dispose();
+        });
+
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    private void viewUsers() {
-        String selectedUserType = (String) userTypeComboBox.getSelectedItem();
-
-        // Clear the table before populating
+    private void toggleTable() {
+        String selectedType = (String) userTypeComboBox.getSelectedItem();
+        // Clear the table when the user type is changed
         tableModel.setRowCount(0);
 
-        if ("Student".equals(selectedUserType)) {
-            int response = JOptionPane.showConfirmDialog(this, "Do you want to view all students?", "Confirm View", JOptionPane.YES_NO_OPTION);
-            if (response == JOptionPane.YES_OPTION) {
-                displayStudents();
-            }
-        } else if ("Staff".equals(selectedUserType)) {
-            int response = JOptionPane.showConfirmDialog(this, "Do you want to view all staff?", "Confirm View", JOptionPane.YES_NO_OPTION);
-            if (response == JOptionPane.YES_OPTION) {
-                displayStaff();
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a user type.");
+        if ("Student".equals(selectedType)) {
+            displayStudentTable();
+        } else if ("Staff".equals(selectedType)) {
+            displayStaffTable();
         }
     }
 
-    private void displayStudents() {
+    private void displayStudentTable() {
+        // Setting column names for the student table
         String[] columnNames = {"Student ID", "Name", "Department", "PC Model", "MAC Address"};
         tableModel.setColumnIdentifiers(columnNames);
 
-        // Fetch students from the service
+        // Fetch students from the service and add them to the table
         java.util.List<Student> students = studentService.getAllStudents();
-
         for (Student student : students) {
             tableModel.addRow(new Object[]{
                 student.getId(),
@@ -105,13 +125,13 @@ public class ViewAllUsersFrame extends JFrame {
         }
     }
 
-    private void displayStaff() {
+    private void displayStaffTable() {
+        // Setting column names for the staff table
         String[] columnNames = {"Staff Name", "Role", "Type", "PC Model", "MAC Address"};
         tableModel.setColumnIdentifiers(columnNames);
 
-        // Fetch staff from the service
+        // Fetch staff from the service and add them to the table
         java.util.List<Staff> staffList = staffService.getAllStaff();
-
         for (Staff staff : staffList) {
             tableModel.addRow(new Object[]{
                 staff.getName(),
@@ -120,6 +140,18 @@ public class ViewAllUsersFrame extends JFrame {
                 staff.getPcModel(),
                 staff.getMacAddress()
             });
+        }
+    }
+
+    private void handleSearch(ActionEvent e) {
+        String userType = (String) userTypeComboBox.getSelectedItem();
+
+        if ("Student".equals(userType)) {
+            displayStudentTable();
+        } else if ("Staff".equals(userType)) {
+            displayStaffTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a user type.");
         }
     }
 }
