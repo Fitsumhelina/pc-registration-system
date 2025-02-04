@@ -84,12 +84,13 @@ public class StudentService {
         List<String> students = FileManager.readFromFile(FILE_NAME);
         for (String studentData : students) {
             String[] studentDetails = studentData.split(",");
-            if (studentDetails[0].equals(id)) { // Assuming the first column is the student ID
-                Student student = new Student(studentDetails[0], studentDetails[1], studentDetails[2], studentDetails[3], studentDetails[4]);
+            if (studentDetails[1].equals(id)) { // Use index 1 for ID (second element)
+                Student student = new Student(studentDetails[1], studentDetails[0], studentDetails[2], studentDetails[3], studentDetails[4]);
                 return student;
             }
         }
         return null; // Return null if student not found
     }
+    
     
 }
