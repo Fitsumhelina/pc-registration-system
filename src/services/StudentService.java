@@ -1,8 +1,9 @@
 package services;
 
 import java.util.List;
+
+import models.Student;
 import utils.FileManager;
-import model.Student;
 
 
 public class StudentService {
@@ -79,12 +80,13 @@ public class StudentService {
         }
         return result.length() > 0 ? result.toString() : "No students found.";
     }
-    public String findStudentById(String studentId) {
+    public Student findStudentById(String id) {
         List<String> students = FileManager.readFromFile(FILE_NAME);
         for (String studentData : students) {
             String[] studentDetails = studentData.split(",");
-            if (studentDetails[0].equals(studentId)) { // Assuming the first column is the student ID
-                return new Student(studentDetails[0], studentDetails[1], studentDetails[2], studentDetails[3], studentDetails[4]);
+            if (studentDetails[0].equals(id)) { // Assuming the first column is the student ID
+                Student student = new Student(studentDetails[0], studentDetails[1], studentDetails[2], studentDetails[3], studentDetails[4]);
+                return student;
             }
         }
         return null; // Return null if student not found

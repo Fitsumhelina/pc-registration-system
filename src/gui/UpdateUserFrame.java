@@ -7,8 +7,8 @@ import javax.swing.*;
 import services.StaffService;
 import services.StudentService;
 
-import model.Student;
-import model.Staff;
+import models.Student;
+import models.Staff;
 
 
 public class UpdateUserFrame extends JFrame {

@@ -1,8 +1,9 @@
 package services;
 
 import java.util.List;
+
+import models.Staff;
 import utils.FileManager;
-import model.Staff;
 
 
 public class StaffService {
@@ -79,7 +80,7 @@ public class StaffService {
         }
         return result.length() > 0 ? result.toString() : "No staff found.";
     }
-    public String findStaffByName(String name) {
+    public Staff findStaffByName(String name) {
         List<String> staff = FileManager.readFromFile(FILE_NAME);
         for (String staffData : staff) {
             String[] staffDetails = staffData.split(",");
