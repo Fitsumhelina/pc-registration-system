@@ -62,7 +62,7 @@ public class AdminFrame extends JFrame {
     }
 
     private void openRegisterFrame() {
-        new RegisterUserFrame();
+        new RegisterUserFrame(adminName);
         dispose();
     }
 
