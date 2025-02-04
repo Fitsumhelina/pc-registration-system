@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -28,7 +29,7 @@ public class ViewAllUsersFrame extends JFrame {
     private JComboBox<String> userTypeComboBox;
     private JTable userTable;
     private DefaultTableModel tableModel;
-    private JButton searchBtn, backBtn;
+    private JButton  backBtn;
     private StudentService studentService;
     private StaffService staffService;
 
@@ -37,7 +38,7 @@ public class ViewAllUsersFrame extends JFrame {
         staffService = new StaffService();
 
         setTitle("Search User");
-        setSize(700, 500);
+        setSize(800, 600); // Increased size for better view
         setLayout(new BorderLayout());
 
         // Header
@@ -64,17 +65,18 @@ public class ViewAllUsersFrame extends JFrame {
         // Table Setup
         tableModel = new DefaultTableModel();
         userTable = new JTable(tableModel);
+        userTable.setRowHeight(30); // Make rows taller for better visibility
+        userTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS); // Allow auto-resizing of columns
         JScrollPane scrollPane = new JScrollPane(userTable);
+        scrollPane.setPreferredSize(new Dimension(750, 400)); // Set the scrollPane size for the table
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         formPanel.add(scrollPane, gbc);
 
         // Buttons
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5));
-        searchBtn = new JButton("Search");
         backBtn = new JButton("Back");
 
-        buttonPanel.add(searchBtn);
         buttonPanel.add(backBtn);
 
         gbc.gridy = 2;
