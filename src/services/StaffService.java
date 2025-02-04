@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import models.Staff;
@@ -90,5 +91,17 @@ public class StaffService {
         }
         return null; // Return null if staff not found
     }
+    public List<Staff> getAllStaff() {
+        List<Staff> staffList = new ArrayList<>();
+        List<String> staffDataList = FileManager.readFromFile(FILE_NAME);
+    
+        for (String data : staffDataList) {
+            String[] staffDetails = data.split(",");
+            Staff staff = new Staff(staffDetails[0], staffDetails[1], staffDetails[2], staffDetails[3], staffDetails[4]);
+            staffList.add(staff);
+        }
+        return staffList;
+    }
+    
     
 }

@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import models.Student;
@@ -92,5 +93,16 @@ public class StudentService {
         return null; // Return null if student not found
     }
     
+    public List<Student> getAllStudents() {
+        List<Student> students = new ArrayList<>();
+        List<String> studentDataList = FileManager.readFromFile(FILE_NAME);
+    
+        for (String data : studentDataList) {
+            String[] studentDetails = data.split(",");
+            Student student = new Student(studentDetails[0], studentDetails[1], studentDetails[2], studentDetails[3], studentDetails[4]);
+            students.add(student);
+        }
+        return students;
+    }
     
 }
