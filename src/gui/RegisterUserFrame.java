@@ -21,6 +21,8 @@ import services.StaffService;
 import services.StudentService;
 
 public class RegisterUserFrame extends JFrame {
+    // private String registeredby;
+    private String AdminName;
     private JComboBox<String> userTypeComboBox;
     private JTextField studentNameField, studentIdField, studentMacAddressField, staffNameField, staffRoleField, staffMacAddressField;
     private JComboBox<String> studentDepartmentComboBox, studentPcModelComboBox, staffPcModelComboBox, staffTypeComboBox;
@@ -29,7 +31,8 @@ public class RegisterUserFrame extends JFrame {
     private StaffService staffService;
     private JPanel studentPanel, staffPanel;
 
-    public RegisterUserFrame() {
+    public RegisterUserFrame(String AdminName) {
+        this.AdminName = AdminName;
         studentService = new StudentService();
         staffService = new StaffService();
 
@@ -184,7 +187,7 @@ public class RegisterUserFrame extends JFrame {
 
     private void handleRegister(ActionEvent e) {
         String userType = (String) userTypeComboBox.getSelectedItem();
-        String currentAdmin = "Admin Name";
+        String currentAdmin = AdminName;
         if ("Student".equals(userType)) {
             if (isStudentFormValid()) {
                 studentService.registerStudent(
