@@ -20,12 +20,25 @@ public class FileManager {
         }
     }
 
-    // Write data to a file (Append mode)
+    // Write a single String to a file (Append mode)
     public static void writeToFile(String fileName, String data) {
         try (FileWriter writer = new FileWriter(DIRECTORY + fileName, true)) {
             writer.write(data + "\n");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    // Write a List of Strings to a file (Append mode)
+    public static boolean writeToFile(String fileName, List<String> dataList) {
+        try (FileWriter writer = new FileWriter(DIRECTORY + fileName, false)) { // False to overwrite the file
+            for (String data : dataList) {
+                writer.write(data + "\n");
+            }
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -56,7 +69,7 @@ public class FileManager {
         List<String> lines = readFromFile(fileName);
         boolean updated = false;
 
-        try (FileWriter writer = new FileWriter(DIRECTORY + fileName, false)) {
+        try (FileWriter writer = new FileWriter(DIRECTORY + fileName, false)) { // Overwrite the file
             for (String line : lines) {
                 if (line.equals(oldData)) {
                     writer.write(newData + "\n");
@@ -77,7 +90,7 @@ public class FileManager {
         List<String> lines = readFromFile(fileName);
         boolean removed = lines.remove(data);
 
-        try (FileWriter writer = new FileWriter(DIRECTORY + fileName, false)) {
+        try (FileWriter writer = new FileWriter(DIRECTORY + fileName, false)) { // Overwrite the file
             for (String line : lines) {
                 writer.write(line + "\n");
             }
