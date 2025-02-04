@@ -1,13 +1,23 @@
 package gui;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import services.StudentService;
-import services.StaffService;
-import models.Student;
 import models.Staff;
+import models.Student;
+import services.StaffService;
+import services.StudentService;
 
 public class ViewAllUsersFrame extends JFrame {
     private JComboBox<String> userTypeComboBox;
@@ -50,6 +60,8 @@ public class ViewAllUsersFrame extends JFrame {
         // Event Listener
         viewButton.addActionListener(e -> viewUsers());
 
+        // Automatically display students on startup or prompt user for selection
+        userTypeComboBox.setSelectedIndex(0); // Default to "Select User Type"
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -61,9 +73,15 @@ public class ViewAllUsersFrame extends JFrame {
         tableModel.setRowCount(0);
 
         if ("Student".equals(selectedUserType)) {
-            displayStudents();
+            int response = JOptionPane.showConfirmDialog(this, "Do you want to view all students?", "Confirm View", JOptionPane.YES_NO_OPTION);
+            if (response == JOptionPane.YES_OPTION) {
+                displayStudents();
+            }
         } else if ("Staff".equals(selectedUserType)) {
-            displayStaff();
+            int response = JOptionPane.showConfirmDialog(this, "Do you want to view all staff?", "Confirm View", JOptionPane.YES_NO_OPTION);
+            if (response == JOptionPane.YES_OPTION) {
+                displayStaff();
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Please select a user type.");
         }
