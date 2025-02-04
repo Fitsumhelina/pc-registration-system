@@ -103,7 +103,7 @@ public class LoginFrame extends JFrame {
                     dispose(); // Close the login frame
                 } else if (adminService.getAllAdmins().contains(username + "," + password)) {
                     // If the user is an admin from the saved file
-                    new AdminFrame(); // Route to AdminFrame
+                    new AdminFrame(username); // Route to AdminFrame
                     dispose(); // Close the login frame
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid credentials!");
