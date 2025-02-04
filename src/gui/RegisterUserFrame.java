@@ -1,8 +1,21 @@
 package gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import javax.swing.*;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import services.StaffService;
 import services.StudentService;
@@ -171,6 +184,7 @@ public class RegisterUserFrame extends JFrame {
 
     private void handleRegister(ActionEvent e) {
         String userType = (String) userTypeComboBox.getSelectedItem();
+        String currentAdmin = "Admin Name";
         if ("Student".equals(userType)) {
             if (isStudentFormValid()) {
                 studentService.registerStudent(
@@ -178,7 +192,8 @@ public class RegisterUserFrame extends JFrame {
                         studentIdField.getText(),
                         (String) studentDepartmentComboBox.getSelectedItem(),
                         (String) studentPcModelComboBox.getSelectedItem(),
-                        studentMacAddressField.getText()
+                        studentMacAddressField.getText(),
+                        currentAdmin
                 );
                 JOptionPane.showMessageDialog(this, "Student Registered Successfully");
             } else {
@@ -191,7 +206,8 @@ public class RegisterUserFrame extends JFrame {
                         staffRoleField.getText(),
                         (String) staffTypeComboBox.getSelectedItem(),
                         (String) staffPcModelComboBox.getSelectedItem(),
-                        staffMacAddressField.getText()
+                        staffMacAddressField.getText(),
+                        currentAdmin
                 );
                 JOptionPane.showMessageDialog(this, "Staff Registered Successfully");
             } else {

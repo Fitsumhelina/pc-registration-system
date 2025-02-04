@@ -10,8 +10,8 @@ import utils.FileManager;
 public class StudentService {
     private static final String FILE_NAME = "students.txt";
 
-    public void registerStudent(String name, String id, String department, String pcModel, String macAddress) {
-        String studentData = name + "," + id + "," + department + "," + pcModel + "," + macAddress;
+    public void registerStudent(String name, String id, String department, String pcModel, String macAddress , String registerdBy) {
+        String studentData = name + "," + id + "," + department + "," + pcModel + "," + macAddress + "," + registerdBy;
         FileManager.writeToFile(FILE_NAME, studentData);
     }
 
@@ -86,7 +86,7 @@ public class StudentService {
         for (String studentData : students) {
             String[] studentDetails = studentData.split(",");
             if (studentDetails[1].equals(id)) { // Use index 1 for ID (second element)
-                Student student = new Student(studentDetails[1], studentDetails[0], studentDetails[2], studentDetails[3], studentDetails[4]);
+                Student student = new Student(studentDetails[1], studentDetails[0], studentDetails[2], studentDetails[3], studentDetails[4], studentDetails[5]);
                 return student;
             }
         }
@@ -99,7 +99,7 @@ public class StudentService {
     
         for (String data : studentDataList) {
             String[] studentDetails = data.split(",");
-            Student student = new Student(studentDetails[0], studentDetails[1], studentDetails[2], studentDetails[3], studentDetails[4]);
+            Student student = new Student(studentDetails[0], studentDetails[1], studentDetails[2], studentDetails[3], studentDetails[4], studentDetails[5]);
             students.add(student);
         }
         return students;

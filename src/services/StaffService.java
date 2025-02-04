@@ -10,8 +10,8 @@ import utils.FileManager;
 public class StaffService {
     private static final String FILE_NAME = "staff.txt";
 
-    public void registerStaff(String name, String role, String type, String pcModel, String macAddress) {
-        String staffData = name + "," + role + "," + type + "," + pcModel + "," + macAddress;
+    public void registerStaff(String name, String role, String type, String pcModel, String macAddress, String registeredBy) {
+        String staffData = name + "," + role + "," + type + "," + pcModel + "," + macAddress + "," + registeredBy;
         FileManager.writeToFile(FILE_NAME, staffData);
     }
 
@@ -86,7 +86,7 @@ public class StaffService {
         for (String staffData : staff) {
             String[] staffDetails = staffData.split(",");
             if (staffDetails[0].equals(name)) { // Assuming the first column is the name
-                return new Staff(staffDetails[0], staffDetails[1], staffDetails[2], staffDetails[3], staffDetails[4]);
+                return new Staff(staffDetails[0], staffDetails[1], staffDetails[2], staffDetails[3], staffDetails[4], staffDetails[5]);
             }
         }
         return null; // Return null if staff not found
@@ -97,7 +97,7 @@ public class StaffService {
     
         for (String data : staffDataList) {
             String[] staffDetails = data.split(",");
-            Staff staff = new Staff(staffDetails[0], staffDetails[1], staffDetails[2], staffDetails[3], staffDetails[4]);
+            Staff staff = new Staff(staffDetails[0], staffDetails[1], staffDetails[2], staffDetails[3], staffDetails[4], staffDetails[5]);
             staffList.add(staff);
         }
         return staffList;

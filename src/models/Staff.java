@@ -6,14 +6,16 @@ public class Staff {
     private String type;
     private String pcModel;
     private String macAddress;
+    private String registeredBy;
 
     // Constructor
-    public Staff(String name, String role, String type, String pcModel, String macAddress) {
+    public Staff(String name, String role, String type, String pcModel, String macAddress , String registeredBy) {
         this.name = name;
         this.role = role;
         this.type = type;
         this.pcModel = pcModel;
         this.macAddress = macAddress;
+        this.registeredBy = registeredBy;
     }
 
     // Getters and Setters
@@ -55,5 +57,9 @@ public class Staff {
 
     public void setMacAddress(String macAddress) {
         this.macAddress = macAddress;
+    }
+    
+    public String getRegisteredBy() {
+        return registeredBy;
     }
 }

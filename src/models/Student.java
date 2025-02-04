@@ -6,14 +6,16 @@ public class Student {
     private String department;
     private String pcModel;
     private String macAddress;
+    private String registeredBy;
 
     // Constructor
-    public Student(String id, String name, String department, String pcModel, String macAddress) {
+    public Student(String id, String name, String department, String pcModel, String macAddress , String registeredBy) {
         this.id = id;
         this.name = name;
         this.department = department;
         this.pcModel = pcModel;
         this.macAddress = macAddress;
+        this.registeredBy = registeredBy;
     }
 
     // Getters and Setters
@@ -55,5 +57,9 @@ public class Student {
 
     public void setMacAddress(String macAddress) {
         this.macAddress = macAddress;
+    }
+    
+    public String getRegisteredBy() {
+        return registeredBy;
     }
 }

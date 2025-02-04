@@ -87,7 +87,6 @@ public class ViewAllUsersFrame extends JFrame {
 
         // Event Listeners
         userTypeComboBox.addActionListener(e -> toggleTable());
-        searchBtn.addActionListener(this::handleSearch);
         backBtn.addActionListener(e -> {
             new AdminFrame("Admin"); // Adjust this based on your actual back screen.
             dispose();
@@ -111,7 +110,7 @@ public class ViewAllUsersFrame extends JFrame {
 
     private void displayStudentTable() {
         // Setting column names for the student table
-        String[] columnNames = {"Student ID", "Name", "Department", "PC Model", "MAC Address"};
+        String[] columnNames = {"Student ID", "Name", "Department", "PC Model", "MAC Address", "Registered By"};
         tableModel.setColumnIdentifiers(columnNames);
 
         // Fetch students from the service and add them to the table
@@ -122,14 +121,15 @@ public class ViewAllUsersFrame extends JFrame {
                 student.getName(),
                 student.getDepartment(),
                 student.getPcModel(),
-                student.getMacAddress()
+                student.getMacAddress(),
+                student.getRegisteredBy()
             });
         }
     }
 
     private void displayStaffTable() {
         // Setting column names for the staff table
-        String[] columnNames = {"Staff Name", "Role", "Type", "PC Model", "MAC Address"};
+        String[] columnNames = {"Staff Name", "Role", "Type", "PC Model", "MAC Address", "Registered By"};
         tableModel.setColumnIdentifiers(columnNames);
 
         // Fetch staff from the service and add them to the table
@@ -140,7 +140,8 @@ public class ViewAllUsersFrame extends JFrame {
                 staff.getRole(),
                 staff.getType(),
                 staff.getPcModel(),
-                staff.getMacAddress()
+                staff.getMacAddress(),
+                staff.getRegisteredBy()
             });
         }
     }
