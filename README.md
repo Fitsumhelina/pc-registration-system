@@ -1,188 +1,184 @@
+Sure! Below is a detailed description for your README file. This should help guide users through understanding the project and how to set it up locally.
 
 ---
 
-### **Entities & Components:**
-1. **Super Admin**  
-   - Manages Admins (Create, Update, Delete, Display, Search)  
-   - Uses `AdminService` to perform actions  
+# PC Registration System (Java-Based)
 
-2. **Admin**  
-   - Manages Students and Staff (Create, Update, Delete, Display, Search)  
-   - Uses `StudentService` & `StaffService`  
+## Project Overview:
+This is a Java-based **PC Registration System** that allows super admins to manage other admins and enables admins to manage students and staff registrations. The system uses file-based storage for all data (admin, student, and staff records) and performs CRUD operations. The GUI is integrated using Java Swing and it is designed in an object-oriented manner for maintainability and scalability.
 
-3. **Student & Staff**  
-   - Basic operations (CRUD) managed by Admin  
-   - Data stored in text files via `FileManager`  
+## Features:
+- **Super Admin** can:
+  - Manage admins (create, update, delete, display, and search).
+  - Use secure login credentials to access the system.
+  
+- **Admin** can:
+  - Manage students and staff (create, update, delete, display, and search).
+  - Securely log in and perform CRUD operations on students and staff records.
 
-4. **Service Files (`AdminService`, `StudentService`, `StaffService`)**  
-   - Performs logic (CRUD operations) 
-   - Defines **where to save** data  
-   - Calls `FileManager` to handle logic  
+- **Student & Staff**:
+  - CRUD operations (Create, Read, Update, Delete) are performed by admins.
+  - Data is stored in separate text files for students and staff.
 
-5. **File Manager**  
-   - Reads/Writes data from/to files  
- 
+- **Data Storage**:
+  - All user and PC-related data is stored in **text files** (`admin.txt`, `student.txt`, `staff.txt`).
+  
+- **Service Files** handle all business logic and CRUD operations.
 
-6. **Storage Files**  
-   - `admin.txt` → Stores Admin Data  
-   - `student.txt` → Stores Student Data  
-   - `staff.txt` → Stores Staff Data  
+## Project Structure:
+
+### **1. Entities and Components:**
+
+- **Super Admin:**
+  - Manages Admins (CRUD).
+  - Logs in using default credentials stored in `superadmin.txt`.
+  
+- **Admin:**
+  - Manages Students and Staff (CRUD).
+  - Logs in securely, creates users, and stores data in text files.
+
+- **Student & Staff:**
+  - Managed by Admins for CRUD operations.
+  - Stored in text files via the `FileManager` class.
+
+- **Service Files (`AdminService`, `StudentService`, `StaffService`):**
+  - Handle the logic of CRUD operations and define the storage paths (admin.txt, student.txt, staff.txt).
+  - Perform file read/write operations via `FileManager`.
+
+- **File Manager:**
+  - Reads from and writes data to text files.
+
+### **2. File Storage:**
+
+- **admin.txt** → Stores Admin Data.
+- **student.txt** → Stores Student Data.
+- **staff.txt** → Stores Staff Data.
 
 ---
 
-### **Use Case Relationship Diagram:**
-#### **1. Super Admin (Manages Admins)**
-- `Super Admin` → **CRUD Operations** on Admin  
-- Uses **AdminService** to interact with **FileManager**  
-- `AdminService` handles logic and saves data in `admin.txt` using file manager 
+## **How to Get Started:**
 
-#### **2. Admin (Manages Students & Staff)**
-- `Admin` → **CRUD Operations** on Students & Staff  
-- Uses **StudentService** & **StaffService**  
-- Each service file defines **storage path** (`student.txt`, `staff.txt`)  
-- `FileManager` processes data  
+### **1. Clone the Repository:**
 
-#### **3. CRUD Operations & Flow**
-- **Create, Update, Delete, Display, Search**  
-- `AdminService`, `StudentService`, `StaffService` call `FileManager`  
-- `FileManager` open a gate to manipulate `admin.txt`, `student.txt`, `staff.txt`  
-
----
-
-### **Full Structure with Paths:**
-#### **Super Admin Manages Admins**
-```plaintext
-Super Admin → AdminService → FileManager → admin.txt
+```bash
+git clone <your-repository-url>
+cd pc-registration-system
 ```
 
-#### **Admin Manages Students**
+### **2. Set Up Files:**
+
+In the `src/data` folder, create a file called `superadmin.txt`. This file should contain the default login credentials for the Super Admin:
+
 ```plaintext
-Admin → StudentService → FileManager → student.txt
+yourname,yourpassword
 ```
 
-#### **Admin Manages Staff**
+This will allow the Super Admin to log in initially and start managing other admins.
+
+### **3. Import the Project:**
+- Open the project in an IDE like **IntelliJ IDEA** or **Eclipse**.
+- Ensure the Java Development Kit (JDK) is installed.
+
+### **4. Run the Application:**
+
+To run the application:
+- Run the `App.java` file as a Java Application using `javac App.java`.
+- The login screen will appear, where you can log in as the Super Admin using the credentials in `superadmin.txt`.
+
+### **5. System Usage:**
+
+#### **Super Admin:**
+1. The Super Admin logs in using the credentials (`superadmin,1212`).
+2. Once logged in, they can:
+   - Create, update, delete, search, and display Admins.
+   - Admins are stored in `admin.txt`.
+
+#### **Admin:**
+1. Once logged in as an Admin, they can:
+   - Manage students and staff (create, update, delete, search, display).
+   - Student and staff data is stored in `student.txt` and `staff.txt`, respectively.
+
+#### **Student/Staff Data:**
+- Admins can perform CRUD operations to manage student and staff details.
+- All data is stored in text files (`student.txt`, `staff.txt`).
+- Data can be displayed in a table format within the GUI.
+
+### **6. Data Storage:**
+
+- The `FileManager` class handles file reading and writing.
+- Admin, student, and staff data are stored in simple text files (`admin.txt`, `student.txt`, `staff.txt`), making the system lightweight and easy to maintain.
+
+### **7. Security:**
+
+- The login system is secured using basic username/password authentication.
+- Admins are authenticated before accessing any CRUD functionality.
+  
+---
+
+## **Directory Structure:**
+
 ```plaintext
-Admin → StaffService → FileManager → staff.txt
+src/
+│
+├── gui/
+│   ├── LoginFrame.java
+│   ├── SuperAdminFrame.java
+│   ├── AdminFrame.java
+│   ├── RegisterUserFrame.java
+│   └── DeleteUserFrame.java
+│   └── SearchUserFrame.java
+│   └── UpdateUserFrame.java
+│   └── ViewAllUsersFrame.java
+│  
+│
+├── model/
+│   ├── Admin.java
+│   ├── Student.java
+│   └── Staff.java
+│
+├── service/
+│   ├── AdminService.java
+│   ├── StudentService.java
+│   └── StaffService.java
+│
+├── utils/
+│   └── FileManager.java
+│
+└── data/
+    ├── admin.txt
+    ├── student.txt
+    └── staff.txt
+    └── superadmin.txt
 ```
 
 ---
 
+## **Services & Operations:**
 
-##  **-> CRUD Operation Flow**
-### **1. Create (Handled in Service)**
-- `AdminService.createAdmin(data)`
-  - Calls `FileManager.write(data, "admin.txt")`
-- `StudentService.createStudent(data)`
-  - Calls `FileManager.write(data, "student.txt")`
-- `StaffService.createStaff(data)`
-  - Calls `FileManager.write(data, "staff.txt")`
+### **CRUD Operations:**
 
-### **2. Update (Handled in Service)**
-- `AdminService.updateAdmin(id, new_data)`
-  - Calls `FileManager.read("admin.txt")`
-  - Updates record in memory
-  - Calls `FileManager.write(updated_data, "admin.txt")`
-- `StudentService.updateStudent(id, new_data)`
-  - Calls `FileManager.read("student.txt")`
-  - Updates record
-  - Calls `FileManager.write(updated_data, "student.txt")`
-- `StaffService.updateStaff(id, new_data)`
-  - Calls `FileManager.read("staff.txt")`
-  - Updates record
-  - Calls `FileManager.write(updated_data, "staff.txt")`
+#### **Create:**
+- **AdminService.createAdmin(data)** → Creates an admin and saves data in `admin.txt`.
+- **StudentService.createStudent(data)** → Creates a student and saves data in `student.txt`.
+- **StaffService.createStaff(data)** → Creates staff and saves data in `staff.txt`.
 
-### **3. Delete (Handled in Service)**
-- `AdminService.deleteAdmin(id)`
-  - Calls `FileManager.read("admin.txt")`
-  - Removes record from memory
-  - Calls `FileManager.write(updated_data, "admin.txt")`
-- `StudentService.deleteStudent(id)`
-  - Calls `FileManager.read("student.txt")`
-  - Removes record
-  - Calls `FileManager.write(updated_data, "student.txt")`
-- `StaffService.deleteStaff(id)`
-  - Calls `FileManager.read("staff.txt")`
-  - Removes record
-  - Calls `FileManager.write(updated_data, "staff.txt")`
+#### **Update:**
+- **AdminService.updateAdmin(id, new_data)** → Updates an admin record in `admin.txt`.
+- **StudentService.updateStudent(id, new_data)** → Updates a student record in `student.txt`.
+- **StaffService.updateStaff(id, new_data)** → Updates a staff record in `staff.txt`.
 
-### **4. Display (Handled in Service)**
-- `AdminService.getAdmins()`
-  - Calls `FileManager.read("admin.txt")`
-  - Returns all records
-- `StudentService.getStudents()`
-  - Calls `FileManager.read("student.txt")`
-  - Returns all records
-- `StaffService.getStaff()`
-  - Calls `FileManager.read("staff.txt")`
-  - Returns all records
+#### **Delete:**
+- **AdminService.deleteAdmin(id)** → Deletes an admin record from `admin.txt`.
+- **StudentService.deleteStudent(id)** → Deletes a student record from `student.txt`.
+- **StaffService.deleteStaff(id)** → Deletes a staff record from `staff.txt`.
 
-### **5. Search (Handled in Service)**
-- `AdminService.searchAdmin(criteria)`
-  - Calls `FileManager.read("admin.txt")`
-  - Filters data in memory
-  - Returns matching records
-- `StudentService.searchStudent(criteria)`
-  - Calls `FileManager.read("student.txt")`
-  - Filters data
-  - Returns matching records
-- `StaffService.searchStaff(criteria)`
-  - Calls `FileManager.read("staff.txt")`
-  - Filters data
-  - Returns matching records
+#### **Display/Search:**
+- **AdminService.getAdmins()** → Displays all admins.
+- **StudentService.getStudents()** → Displays all students.
+- **StaffService.getStaff()** → Displays all staff.
 
----
+### **File Management:**
+- **FileManager.read(file)** → Reads data from a specified file.
+- **FileManager.write(data, file)** → Writes data to a specified file.
 
-## **Final Structure**
-1. **Super Admin manages Admins**
-   ```plaintext
-   Super Admin → AdminService (CRUD) → FileManager → admin.txt
-   ```
-2. **Admin manages Students & Staff**
-   ```plaintext
-   Admin → StudentService (CRUD) → FileManager → student.txt
-   Admin → StaffService (CRUD) → FileManager → staff.txt
-   ```
-3. **Service Files (AdminService, StudentService, StaffService)**
-   - Handle **all CRUD logic**
-   - Call `FileManager.read()` or `FileManager.write()`
-4. **FileManager**
-   - Only reads/writes files
-   - Acts as the bridge between Services and Storage
-
----
-## FOLDER STRUCTURE 
-1. **GUI**
-   - LoginFrame.java
-   - SuperAdminFrame.java
-   - AdminFrame.java
-   - Student
-   - Staff
-
-2. **model/**
-   - Admin.java
-   - StudentPc.java
-   - StaffPc.java
-
-3. **service/**
-   - AdminService.java
-   - StudentService.java
-   - Staff
-
-4. **utils/**
-   - FileManager.java
-
-5. **data/**
-   - admin.txt
-   - student_pc.txt
-   - staff_pc.txt
-
-6. **Src/**
-   - gui/
-   - model/
-   - utils/
-   - APP.java
-
-7. **Project Architecture - SubPlan**
-   - src 
-   - data 
 ---
