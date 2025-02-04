@@ -7,8 +7,8 @@ import utils.FileManager;
 public class StudentService {
     private static final String FILE_NAME = "students.txt";
 
-    public void registerStudent(String name, String department, String pcModel, String macAddress) {
-        String studentData = name + "," + department + "," + pcModel + "," + macAddress;
+    public void registerStudent(String name, String id ,String department, String pcModel, String macAddress) {
+        String studentData = name + "," + id + "," + department + "," + pcModel + "," + macAddress;
         FileManager.writeToFile(FILE_NAME, studentData);
     }
 
