@@ -69,8 +69,8 @@ public class AdminFrame extends JFrame {
         departmentComboBox = new JComboBox<>(new String[]{"Select Department", "CS", "EE", "ME"});
         studentPanel.add(new JLabel("Name:")); studentPanel.add(nameField);
         studentPanel.add(new JLabel("ID:")); studentPanel.add(idField);
-        studentPanel.add(new JLabel("Department:")); studentPanel.add(departmentComboBox);
         studentPanel.add(new JLabel("PC Model:")); studentPanel.add(pcModelComboBox);
+        studentPanel.add(new JLabel("Department:")); studentPanel.add(departmentComboBox);
         studentPanel.add(new JLabel("MAC Address:")); studentPanel.add(macAddressField);
         studentPanel.setVisible(false);
         gbc.gridy = 2;
@@ -105,9 +105,6 @@ public class AdminFrame extends JFrame {
         buttonPanel.add(viewBtn);
         buttonPanel.add(LogoutBtn);
 
-
-
-        
         gbc.gridy = 3; gbc.gridwidth = 2;
         formPanel.add(buttonPanel, gbc);
 
