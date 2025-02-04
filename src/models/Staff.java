@@ -1,30 +1,22 @@
 package model;
 
-public class Student {
-    private String id;
+public class Staff {
     private String name;
-    private String department;
+    private String role;
+    private String type;
     private String pcModel;
     private String macAddress;
 
     // Constructor
-    public Student(String id, String name, String department, String pcModel, String macAddress) {
-        this.id = id;
+    public Staff(String name, String role, String type, String pcModel, String macAddress) {
         this.name = name;
-        this.department = department;
+        this.role = role;
+        this.type = type;
         this.pcModel = pcModel;
         this.macAddress = macAddress;
     }
 
     // Getters and Setters
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -33,12 +25,20 @@ public class Student {
         this.name = name;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getRole() {
+        return role;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getPcModel() {

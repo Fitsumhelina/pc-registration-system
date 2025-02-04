@@ -1,25 +1,66 @@
 package services;
 
 import java.util.List;
-
 import utils.FileManager;
+import model.Student;
+
 
 public class StudentService {
     private static final String FILE_NAME = "students.txt";
 
-    public void registerStudent(String name, String id ,String department, String pcModel, String macAddress) {
+    public void registerStudent(String name, String id, String department, String pcModel, String macAddress) {
         String studentData = name + "," + id + "," + department + "," + pcModel + "," + macAddress;
         FileManager.writeToFile(FILE_NAME, studentData);
     }
 
-    public boolean updateStudent(String name, String department, String pcModel, String macAddress) {
-        String oldData = name + ",";
-        String newData = name + "," + department + "," + pcModel + "," + macAddress;
-        return FileManager.updateFile(FILE_NAME, oldData, newData);
+    public boolean updateStudent(String id, String name, String department, String pcModel, String macAddress) {
+        // Read all students' data from file
+        List<String> students = FileManager.readFromFile(FILE_NAME);
+        boolean updated = false;
+
+        // Iterate through the students and find the one with the matching ID
+        for (int i = 0; i < students.size(); i++) {
+            String studentData = students.get(i);
+            String[] studentDetails = studentData.split(",");
+
+            if (studentDetails[1].equals(id)) { // Match by student ID
+                // Replace the student's old data with the new data
+                String newData = name + "," + id + "," + department + "," + pcModel + "," + macAddress;
+                students.set(i, newData);
+                updated = true;
+                break;
+            }
+        }
+
+        if (updated) {
+            // Write updated list back to file
+            return FileManager.writeToFile(FILE_NAME, students);
+        }
+        return false; // If no student found with matching ID
     }
 
-    public boolean deleteStudent(String name) {
-        return FileManager.deleteFromFile(FILE_NAME, name);
+    public boolean deleteStudent(String id) {
+        // Read all students' data from file
+        List<String> students = FileManager.readFromFile(FILE_NAME);
+        boolean deleted = false;
+
+        // Iterate through the students and find the one with the matching ID
+        for (int i = 0; i < students.size(); i++) {
+            String studentData = students.get(i);
+            String[] studentDetails = studentData.split(",");
+
+            if (studentDetails[1].equals(id)) { // Match by student ID
+                students.remove(i);
+                deleted = true;
+                break;
+            }
+        }
+
+        if (deleted) {
+            // Write updated list back to file
+            return FileManager.writeToFile(FILE_NAME, students);
+        }
+        return false; // If no student found with matching ID
     }
 
     public String viewAllStudents() {
@@ -38,4 +79,15 @@ public class StudentService {
         }
         return result.length() > 0 ? result.toString() : "No students found.";
     }
+    public String findStudentById(String studentId) {
+        List<String> students = FileManager.readFromFile(FILE_NAME);
+        for (String studentData : students) {
+            String[] studentDetails = studentData.split(",");
+            if (studentDetails[0].equals(studentId)) { // Assuming the first column is the student ID
+                return new Student(studentDetails[0], studentDetails[1], studentDetails[2], studentDetails[3], studentDetails[4]);
+            }
+        }
+        return null; // Return null if student not found
+    }
+    
 }
