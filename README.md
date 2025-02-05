@@ -1,6 +1,4 @@
-Sure! Below is a detailed description for your README file. This should help guide users through understanding the project and how to set it up locally.
 
----
 
 # PC Registration System (Java-Based)
 
@@ -83,6 +81,7 @@ This will allow the Super Admin to log in initially and start managing other adm
 
 To run the application:
 - Run the `App.java` file as a Java Application using `javac App.java`.
+- And all of ther `.java` files also have to be compiled to `.class` in order to do that use `javac + file name ` and better to compile ``models`->`utils`-> `services` -> `gui`->`app.java` files respectively 
 - The login screen will appear, where you can log in as the Super Admin using the credentials in `superadmin.txt`.
 
 ### **5. System Usage:**
