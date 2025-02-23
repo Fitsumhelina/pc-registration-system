@@ -60,8 +60,11 @@ This is a Java-based **PC Registration System** that allows super admins to mana
 
 ```bash
 git clone https://github.com/Fitsumhelina/pc-registration-system.git
-cd src
 ```
+### **2. Route to the main folder 
+```bash
+cd src
+``` 
 
 ### **2. Set Up Files:**
 
@@ -75,7 +78,7 @@ This will allow the Super Admin to log in initially and start managing other adm
 
 ### **3. Import the Project:**
 - Open the project in an IDE like **IntelliJ IDEA** or **Eclipse**.
-- if you're using Vs code y,,ou have to install java kit from [here](), then just install it in your computer then you can open up your project in Vscode 
+- if you're using Vs code y,,ou have to install java kit from [here](https://code.visualstudio.com/docs/java/java-tutorial), then just install it in your computer then you can open up your project in Vscode 
 - Ensure the Java Development Kit (JDK) is installed.
 
 ### **4. Run the Application:**
