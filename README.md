@@ -1,6 +1,3 @@
-Sure! Here’s a **refined, professional, and visually appealing** version of your README while keeping all the content intact. I’ve improved the **structure, formatting, and clarity** to make it more engaging.  
-
----
 
 # 🚀 **PC Registration System** (Java-Based)  
 
