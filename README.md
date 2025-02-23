@@ -61,7 +61,7 @@ This is a Java-based **PC Registration System** that allows super admins to mana
 ```bash
 git clone https://github.com/Fitsumhelina/pc-registration-system.git
 ```
-### **2. Route to the main folder 
+### **1.1 Route to the main folder**
 ```bash
 cd src
 ``` 
