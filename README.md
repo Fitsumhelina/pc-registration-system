@@ -80,17 +80,17 @@ This will allow the Super Admin to log in initially and start managing other adm
 ### **4. Run the Application:**
 
 To run the application:
+- all of ther `.java` files also have to be compiled to `.class` in order to do that you can use `javac + file name ` and it's better to compile `models`->`utils`-> `services` -> `gui`->`app.java` files respectively 
 - Run the `App.java` file as a Java Application using `javac App.java`.
-- And all of ther `.java` files also have to be compiled to `.class` in order to do that use `javac + file name ` and better to compile `models`->`utils`-> `services` -> `gui`->`app.java` files respectively 
 - The login screen will appear, where you can log in as the Super Admin using the credentials in `superadmin.txt`.
 
 ### **5. System Usage:**
 
 #### **Super Admin:**
-1. The Super Admin logs in using the credentials (`superadmin,1212`).
+1. The Super Admin logs in using the credentials (`yourUsername,yourPassword`).
 2. Once logged in, they can:
    - Create, update, delete, search, and display Admins.
-   - Admins are stored in `admin.txt`.
+   - Admins are stored in `admin.txt` automatically.
 
 #### **Admin:**
 1. Once logged in as an Admin, they can:
@@ -99,7 +99,7 @@ To run the application:
 
 #### **Student/Staff Data:**
 - Admins can perform CRUD operations to manage student and staff details.
-- All data is stored in text files (`student.txt`, `staff.txt`).
+- All data is stored in text files (`student.txt`, `staff.txt`) implicitly.
 - Data can be displayed in a table format within the GUI.
 
 ### **6. Data Storage:**
