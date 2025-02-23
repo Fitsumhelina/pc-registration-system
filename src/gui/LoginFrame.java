@@ -97,7 +97,7 @@ public class LoginFrame extends JFrame {
                 String password = new String(passwordField.getPassword());
 
                 // Check if the user is the superadmin
-                if (username.equals("superadmin") && validateSuperAdminPassword(password)) {
+                if (validateSuperAdminCredentials(username, password)) {
                     // Route to RegisterAdminFrame if superadmin is valid
                     new SuperAdminFrame(); // Route to RegisterAdminFrame
                     dispose(); // Close the login frame
@@ -140,14 +140,15 @@ public class LoginFrame extends JFrame {
         loginButton.setPreferredSize(new Dimension(getWidth() / 2, 40));
     }
 
-    // Method to validate super admin password by reading from a file
-    private boolean validateSuperAdminPassword(String inputPassword) {
+    // Method to validate super admin credentials by reading from a file
+    private boolean validateSuperAdminCredentials(String inputUsername, String inputPassword) {
         try (BufferedReader reader = new BufferedReader(new FileReader("data/superadmin.txt"))) {
             String line = reader.readLine();
             if (line != null && line.contains(",")) {
                 String[] credentials = line.split(",");
+                String superAdminUsername = credentials[0];
                 String superAdminPassword = credentials[1];
-                return inputPassword.equals(superAdminPassword);
+                return inputUsername.equals(superAdminUsername) && inputPassword.equals(superAdminPassword);
             }
         } catch (IOException e) {
             e.printStackTrace();
