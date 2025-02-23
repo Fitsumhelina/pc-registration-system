@@ -1,187 +1,266 @@
-
-
-# PC Registration System (Java-Based)
-
-## Project Overview:
-This is a Java-based **PC Registration System** that allows super admins to manage other admins and enables admins to manage students and staff registrations. The system uses file-based storage for all data (admin, student, and staff records) and performs CRUD operations. The GUI is integrated using Java Swing and it is designed in an object-oriented manner for maintainability and scalability.
-
-## Features:
-- **Super Admin** can:
-  - Manage admins (create, update, delete, display, and search).
-  - Use secure login credentials to access the system.
-  
-- **Admin** can:
-  - Manage students and staff (create, update, delete, display, and search).
-  - Securely log in and perform CRUD operations on students and staff records.
-
-- **Student & Staff**:
-  - CRUD operations (Create, Read, Update, Delete) are performed by admins.
-  - Data is stored in separate text files for students and staff.
-
-- **Data Storage**:
-  - All user and PC-related data is stored in **text files** (`admin.txt`, `student.txt`, `staff.txt`).
-  
-- **Service Files** handle all business logic and CRUD operations.
-
-## Project Structure:
-
-### **1. Entities and Components:**
-
-- **Super Admin:**
-  - Manages Admins (CRUD).
-  - Logs in using default credentials stored in `superadmin.txt`.
-  
-- **Admin:**
-  - Manages Students and Staff (CRUD).
-  - Logs in securely, creates users, and stores data in text files.
-
-- **Student & Staff:**
-  - Managed by Admins for CRUD operations.
-  - Stored in text files via the `FileManager` class.
-
-- **Service Files (`AdminService`, `StudentService`, `StaffService`):**
-  - Handle the logic of CRUD operations and define the storage paths (admin.txt, student.txt, staff.txt).
-  - Perform file read/write operations via `FileManager`.
-
-- **File Manager:**
-  - Reads from and writes data to text files.
-
-### **2. File Storage:**
-
-- **admin.txt** → Stores Admin Data.
-- **student.txt** → Stores Student Data.
-- **staff.txt** → Stores Staff Data.
+Sure! Here’s a **refined, professional, and visually appealing** version of your README while keeping all the content intact. I’ve improved the **structure, formatting, and clarity** to make it more engaging.  
 
 ---
 
-## **How to Get Started:**
+# 🚀 **PC Registration System** (Java-Based)  
 
-### **1. Clone the Repository:**
+📌 **A Java-based PC Registration System with GUI & File-Based Storage**  
 
-```bash
-git clone https://github.com/Fitsumhelina/pc-registration-system.git
-```
-### **1.1 Route to the main folder**
-```bash
-cd src
-``` 
+---  
 
-### **2. Set Up Files:**
+## 📖 **Project Overview**  
 
-In the `src/data` folder, create a file called `superadmin.txt`. This file should contain the default login credentials for the Super Admin:
+The **PC Registration System** is a **Java-based** application designed to manage **student and staff registrations**. It features **role-based access**, where a **Super Admin** manages **Admins**, and Admins handle **students & staff**.  
 
-```plaintext
-yourname,yourpassword
-```
+The system is built using **Java Swing for GUI**, follows **OOP principles**, and uses **file-based storage** for data persistence.  
 
-This will allow the Super Admin to log in initially and start managing other admins.
-
-### **3. Import the Project:**
-- Open the project in an IDE like **IntelliJ IDEA** or **Eclipse**.
-- if you're using Vs code y,,ou have to install java kit from [here](https://code.visualstudio.com/docs/java/java-tutorial), then just install it in your computer then you can open up your project in Vscode 
-- Ensure the Java Development Kit (JDK) is installed.
-
-### **4. Run the Application:**
-
-To run the application:
-- all of ther `.java` files also have to be compiled to `.class` in order to do that you can use `javac + file name ` and it's better to compile `models`->`utils`-> `services` -> `gui`->`app.java` files respectively 
-- Run the `App.java` file as a Java Application using `javac App.java`.
-- The login screen will appear, where you can log in as the Super Admin using the credentials in `superadmin.txt`.
-
-### **5. System Usage:**
-
-#### **Super Admin:**
-1. The Super Admin logs in using the credentials (`yourUsername,yourPassword`).
-2. Once logged in, they can:
-   - Create, update, delete, search, and display Admins.
-   - Admins are stored in `admin.txt` automatically.
-
-#### **Admin:**
-1. Once logged in as an Admin, they can:
-   - Manage students and staff (create, update, delete, search, display).
-   - Student and staff data is stored in `student.txt` and `staff.txt`, respectively.
-
-#### **Student/Staff Data:**
-- Admins can perform CRUD operations to manage student and staff details.
-- All data is stored in text files (`student.txt`, `staff.txt`) implicitly.
-- Data can be displayed in a table format within the GUI.
-
-### **6. Data Storage:**
-
-- The `FileManager` class handles file reading and writing.
-- Admin, student, and staff data are stored in simple text files (`admin.txt`, `student.txt`, `staff.txt`), making the system lightweight and easy to maintain.
-
-### **7. Security:**
-
-- The login system is secured using basic username/password authentication.
-- Admins are authenticated before accessing any CRUD functionality.
-  
 ---
 
-## **Directory Structure:**
+## 🎯 **Key Features**  
+
+🔹 **Super Admin:**  
+✅ Secure login authentication  
+✅ Manage Admins (**Create, Update, Delete, Display, Search**)  
+
+🔹 **Admin:**  
+✅ Secure login authentication  
+✅ Manage Students & Staff (**Create, Update, Delete, Display, Search**)  
+
+🔹 **Student & Staff:**  
+✅ CRUD operations performed by Admins  
+✅ Data stored in `student.txt` & `staff.txt`  
+
+🔹 **File-Based Data Storage:**  
+✅ Uses simple `.txt` files (`admin.txt`, `student.txt`, `staff.txt`) for lightweight data handling  
+
+🔹 **Service Layer:**  
+✅ Handles all business logic (**AdminService, StudentService, StaffService**)  
+
+🔹 **File Management System:**  
+✅ Reads/Writes data via `FileManager.java`  
+
+---
+## Project Overview
+
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="./img/1.png" width="300"/></td>
+      <td><img src="./img/2.png" width="300"/></td>
+      <td><img src="./img/3.png" width="300"/></td>
+    </tr>
+    <tr>
+      <td><img src="./img/5.png" width="300"/></td>
+      <td><img src="./img/6.png" width="300"/></td>
+      <td><img src="./img/7.png" width="300"/></td>
+    </tr>
+  </table>
+</div>
+
+
+---
+## 🏗 **Project Structure**  
 
 ```plaintext
 src/
 │
-├── gui/
+├── gui/                 # Graphical User Interface (Swing-based)
 │   ├── LoginFrame.java
 │   ├── SuperAdminFrame.java
 │   ├── AdminFrame.java
 │   ├── RegisterUserFrame.java
-│   └── DeleteUserFrame.java
-│   └── SearchUserFrame.java
-│   └── UpdateUserFrame.java
-│   └── ViewAllUsersFrame.java
+│   ├── DeleteUserFrame.java
+│   ├── SearchUserFrame.java
+│   ├── UpdateUserFrame.java
+│   ├── ViewAllUsersFrame.java
 │  
-│
-├── model/
+├── model/               # Entity Models
 │   ├── Admin.java
 │   ├── Student.java
-│   └── Staff.java
+│   ├── Staff.java
 │
-├── service/
+├── service/             # Business Logic (CRUD Operations)
 │   ├── AdminService.java
 │   ├── StudentService.java
-│   └── StaffService.java
+│   ├── StaffService.java
 │
-├── utils/
-│   └── FileManager.java
+├── utils/               # Utility Functions
+│   ├── FileManager.java
 │
-└── data/
+└── data/                # File-Based Storage
     ├── admin.txt
     ├── student.txt
-    └── staff.txt
-    └── superadmin.txt
+    ├── staff.txt
+    ├── superadmin.txt
 ```
 
 ---
 
-## **Services & Operations:**
+## 🚀 **Getting Started**  
 
-### **CRUD Operations:**
+### **1️⃣ Clone the Repository**  
 
-#### **Create:**
-- **AdminService.createAdmin(data)** → Creates an admin and saves data in `admin.txt`.
-- **StudentService.createStudent(data)** → Creates a student and saves data in `student.txt`.
-- **StaffService.createStaff(data)** → Creates staff and saves data in `staff.txt`.
+```bash
+git clone https://github.com/Fitsumhelina/pc-registration-system.git
+```
 
-#### **Update:**
-- **AdminService.updateAdmin(id, new_data)** → Updates an admin record in `admin.txt`.
-- **StudentService.updateStudent(id, new_data)** → Updates a student record in `student.txt`.
-- **StaffService.updateStaff(id, new_data)** → Updates a staff record in `staff.txt`.
+### **2️⃣ Navigate to the Project Directory**  
 
-#### **Delete:**
-- **AdminService.deleteAdmin(id)** → Deletes an admin record from `admin.txt`.
-- **StudentService.deleteStudent(id)** → Deletes a student record from `student.txt`.
-- **StaffService.deleteStaff(id)** → Deletes a staff record from `staff.txt`.
+```bash
+cd src
+```
 
-#### **Display/Search:**
-- **AdminService.getAdmins()** → Displays all admins.
-- **StudentService.getStudents()** → Displays all students.
-- **StaffService.getStaff()** → Displays all staff.
+### **3️⃣ Setup Login Credentials**  
 
-### **File Management:**
-- **FileManager.read(file)** → Reads data from a specified file.
-- **FileManager.write(data, file)** → Writes data to a specified file.
+1. Navigate to `src/data/`  
+2. Create a **`superadmin.txt`** file  
+3. Add the **Super Admin's credentials**:  
+
+```plaintext
+yourUsername,yourPassword
+```
+
+### **4️⃣ Open in Your Preferred IDE**  
+
+📌 **Compatible with:**  
+✅ IntelliJ IDEA  
+✅ Eclipse  
+✅ VS Code (Install [Java Extension Pack](https://code.visualstudio.com/docs/java/java-tutorial))  
+
+### **5️⃣ Compile & Run the Project**  
+
+To compile the files, follow this order:  
+📌 **Models → Utils → Services → GUI → `App.java`**  
+
+```bash
+javac App.java
+java App
+```
+
+### **6️⃣ Login & Start Managing Users**  
+
+- **Super Admin logs in** using the credentials in `superadmin.txt`  
+- **Super Admin manages Admins** (CRUD operations)  
+- **Admins manage Students & Staff** (CRUD operations)  
 
 ---
+
+## 🔧 **System Functionalities**  
+
+### **👑 Super Admin Functions**  
+
+✅ **Create Admins**  
+✅ **Update Admins**  
+✅ **Delete Admins**  
+✅ **Search Admins**  
+✅ **View All Admins**  
+
+📌 **Admin Data is stored in** → `admin.txt`  
+
+---
+
+### **🛠 Admin Functions**  
+
+✅ **Create Students & Staff**  
+✅ **Update Student & Staff Records**  
+✅ **Delete Student & Staff Records**  
+✅ **Search for Students & Staff**  
+✅ **View All Students & Staff**  
+
+📌 **Student Data is stored in** → `student.txt`  
+📌 **Staff Data is stored in** → `staff.txt`  
+
+---
+
+## 📂 **File Storage & Management**  
+
+🔹 **Admin Data:** Stored in `admin.txt`  
+🔹 **Student Data:** Stored in `student.txt`  
+🔹 **Staff Data:** Stored in `staff.txt`  
+
+📌 **File operations are managed by:** `FileManager.java`  
+
+```java
+// Read Data from a File
+FileManager.read("admin.txt");
+
+// Write Data to a File
+FileManager.write("New Admin Record", "admin.txt");
+```
+
+---
+
+## 🔐 **Security Measures**  
+
+✅ **Username & Password Authentication** for login  
+✅ **Admins & Super Admins have role-based access control**  
+✅ **Data integrity maintained through file-based storage**  
+
+---
+
+## 🛠 **CRUD Operations Overview**  
+
+### **📝 Create**  
+```java
+AdminService.createAdmin(new Admin("admin1", "password123"));
+StudentService.createStudent(new Student("John Doe", "1234"));
+StaffService.createStaff(new Staff("Jane Doe", "5678"));
+```
+
+### **🔍 Read / Display**  
+```java
+List<Admin> admins = AdminService.getAdmins();
+List<Student> students = StudentService.getStudents();
+List<Staff> staff = StaffService.getStaff();
+```
+
+### **✏️ Update**  
+```java
+AdminService.updateAdmin("admin1", new Admin("admin1", "newpassword"));
+StudentService.updateStudent("1234", new Student("John Doe", "5678"));
+StaffService.updateStaff("5678", new Staff("Jane Doe", "91011"));
+```
+
+### **🗑 Delete**  
+```java
+AdminService.deleteAdmin("admin1");
+StudentService.deleteStudent("1234");
+StaffService.deleteStaff("5678");
+```
+
+---
+
+## 💡 **Why Choose This System?**  
+
+✅ **Lightweight & Fast** → Uses file-based storage (No need for databases)  
+✅ **User-Friendly** → Simple **Java Swing GUI**  
+✅ **Secure** → Role-based login system  
+✅ **Easy to Maintain** → **Object-Oriented & Modular Code**  
+
+---
+
+## 💻 **Technologies Used**  
+
+🚀 **Programming Language:** Java  
+📁 **Data Storage:** File-based storage (`.txt` files)  
+🖥 **GUI Framework:** Java Swing  
+🛠 **Development Tools:** IntelliJ IDEA, VS Code  
+
+---
+
+## 📌 **Future Improvements**  
+
+🔹 **Switch from text files to a database (MySQL/PostgreSQL)**  
+🔹 **Implement password encryption for stronger security**  
+🔹 **Add logging system for tracking admin activities**  
+🔹 **Enhance GUI with a more modern UI design**  
+
+---
+
+## 📩 **Contact & Contribution**  
+
+💡 **Want to contribute?**  
+Feel free to **fork the repo**, create a **pull request**, or **open an issue**!  
+
+📧 **For any inquiries, reach out via [linkedin](https://www.linkedin.com/in/fitsumhelina/)!**  
+
